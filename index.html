@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>İkigai × Matematik — Kişisel Matematik Pusulan</title>
+<meta name="description" content="İkigai’nin dört dairesini ölçen bir pusula, 8 matematik alanıyla eşleştirme, interaktif laboratuvar, günlük antrenman ve 90 günlük kişisel yol haritası." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>∑</text></svg>" />
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#0a0d12" />
+<link rel="apple-touch-icon" href="assets/icon.svg" />
+<link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <a class="brand" href="#pusula" aria-label="Ana sayfa">
+    <span class="brand-mark">∑</span>
+    <span class="brand-text">ikigai<span class="cross">×</span>matematik</span>
+  </a>
+  <nav class="nav" id="nav">
+    <a href="#pusula" data-route="pusula">Pusula</a>
+    <a href="#laboratuvar" data-route="laboratuvar">Laboratuvar</a>
+    <a href="#antrenman" data-route="antrenman">Antrenman</a>
+    <a href="#yol" data-route="yol">Yol Haritası</a>
+    <a href="#kutuphane" data-route="kutuphane">Kütüphane</a>
+  </nav>
+  <div class="topbar-right">
+    <span class="streak" id="topStreak" title="Üst üste antrenman günü">🔥 <b>0</b></span>
+    <button class="btn btn-ghost btn-sm" id="resetBtn" title="Tüm verileri sıfırla">Sıfırla</button>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= PUSULA ================= -->
+  <section class="view" id="view-pusula">
+
+    <div class="hero">
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <p class="eyebrow">Kişisel matematik pusulası · sürüm 1.0</p>
+        <h1>Sevdiğin şey ile<br /><em>ihtiyaç duyulan</em> şey<br />kesiştiğinde matematik<br />bir iş değil, bir <span class="hl">yön</span> olur.</h1>
+        <p class="lede">
+          Bu uygulama sana “genel geçer matematik tavsiyesi” vermiyor. Dört ikigai dairesini ölçüyor,
+          cevaplarını sekiz matematik alanıyla karşılaştırıyor ve ortaya <b>yalnızca sana ait</b> bir
+          öğrenme rotası çıkarıyor: laboratuvar, antrenman ve 90 günlük plan.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startAssessment">Pusulamı oluştur <span aria-hidden="true">→</span></button>
+          <a class="btn btn-ghost" href="#laboratuvar">Önce laboratuvarı gör</a>
+        </div>
+        <div class="hero-stats">
+          <div><b>16</b><span>ifade · 4 daire</span></div>
+          <div><b>8</b><span>matematik alanı</span></div>
+          <div><b>6</b><span>interaktif deney</span></div>
+          <div><b>90</b><span>günlük plan</span></div>
+        </div>
+      </div>
+      <div class="hero-diagram" aria-hidden="true">
+        <svg viewBox="0 0 420 420" class="venn">
+          <circle cx="160" cy="160" r="118" class="v1" />
+          <circle cx="260" cy="160" r="118" class="v2" />
+          <circle cx="160" cy="260" r="118" class="v3" />
+          <circle cx="260" cy="260" r="118" class="v4" />
+          <text x="112" y="120" class="vt">SEV</text>
+          <text x="282" y="120" class="vt">YET</text>
+          <text x="112" y="318" class="vt">DÜNYA</text>
+          <text x="282" y="318" class="vt">EKONOMİ</text>
+          <text x="210" y="214" class="vt-core">ikigai</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="axis-cards" id="axisCards"></div>
+
+    <details class="method">
+      <summary>Bu pusula nasıl hesaplıyor? <span class="muted small">(yöntem şeffaf olsun)</span></summary>
+      <div class="method-body">
+        <ol>
+          <li><b>16 ifade → 4 eksen.</b> Her daireye 4 ifade düşer. Cevaplar 1–5 arası; toplam 4–20 aralığı 0–100’e gerilir. Böylece “Sevdiğin şey 78/100, Ekonomi 41/100” gibi okunabilir bir profil çıkar.</li>
+          <li><b>Profil → alan eşleşmesi.</b> Sekiz matematik alanının her biri, dört eksende 0–1 arası bir ağırlık taşır. Senin profilin ile alan profili <em>korelasyonla</em> karşılaştırılır: “neye daha çok değer veriyorsun?” sorusu ölçülür, “ne kadar yüksek puan verdin?” değil. Böylece her şeye 4 veren biri otomatik olarak “her şeye uygun” görünmez. Buna küçük bir düzey uyumu payı eklenir; yani profilin hem <span class="mono">şekli</span> hem yüksekliği hesaba girer.</li>
+          <li><b>Güven etiketi.</b> Dört puanın birbirine yakınlığı ve birinci–ikinci alan arasındaki fark ölçülür. Fark küçükse sonuç “düşük güven” olarak işaretlenir — bu bir kusur değil, dürüstlüktür: o durumda elinde tek bir yön değil, deneyeceğin alanların listesi vardır.</li>
+          <li><b>İkigai indeksi.</b> Dört puanın geometrik ortalaması. Aritmetik ortalama bir dairedeki düşüklüğü gizler; geometrik ortalama gizlemez. Bir halka çok zayıfsa indeks de düşer — ikigainin “dört daire birlikte” fikri budur.</li>
+          <li><b>Antrenman uyarlaması.</b> Zayıf olduğun kategoriye daha çok soru gelir. Sistem seni rahatlatan sorularla değil, büyüten sorularla karşılaştırır.</li>
+        </ol>
+        <p class="muted small" style="margin:0">Bu bir yetenek testi değil, bir yön bulma aracıdır. Sonuç bir etiket değil; 6 hafta sonra yeniden bakacağın bir fotoğraf. Cevaplar yalnızca bu tarayıcıda saklanır.</p>
+      </div>
+    </details>
+
+    <!-- Anket -->
+    <div class="panel" id="assessmentPanel" hidden>
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Adım 1 / 2</p>
+          <h2>16 ifade, yaklaşık 4 dakika</h2>
+          <p class="muted">İçinden gelen ilk cevabı seç. “Doğru” cevap yok; pusula senden öğreniyor.</p>
+        </div>
+        <div class="progress-wrap">
+          <div class="progress"><span id="assessProgress"></span></div>
+          <span class="muted small" id="assessCount">0 / 16</span>
+        </div>
+      </div>
+
+      <div class="assessment" id="assessment"></div>
+
+      <div class="panel-foot">
+        <button class="btn btn-primary" id="computeBtn" disabled>Pusulamı hesapla</button>
+        <span class="muted small" id="computeHint">16 ifadenin tümünü yanıtla.</span>
+      </div>
+    </div>
+
+    <!-- Sonuç -->
+    <div id="results"></div>
+  </section>
+
+  <!-- ================= LABORATUVAR ================= -->
+  <section class="view" id="view-laboratuvar" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Sezgi laboratuvarı</p>
+      <h2>Formülü ezberleme. <em>Çalıştığını gör.</em></h2>
+      <p class="lede narrow">
+        Altı deney; her biri bir matematiğin “neden böyle” sorusuna cevap. Kaydırıcıları oynat,
+        sayıları değiştir, grafiğin nasıl tepki verdiğini izle. Her deneyin altında
+        <b>“bu nerede işe yarar?”</b> notu var.
+      </p>
+    </div>
+    <div class="lab-grid" id="labGrid"></div>
+  </section>
+
+  <!-- ================= ANTRENMAN ================= -->
+  <section class="view" id="view-antrenman" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Günlük antrenman</p>
+      <h2>10 soru. <em>Her gün aynı saat.</em></h2>
+      <p class="lede narrow">
+        Sorular zayıf olduğun kategoriye göre ağırlıklandırılır; yani sistem seninle birlikte zorlaşır.
+        Süre ve doğruluk kaydedilir, üst üste gün sayısı (streak) takip edilir.
+      </p>
+    </div>
+
+    <div class="trainer-wrap">
+      <aside class="trainer-side">
+        <div class="stat-card">
+          <p class="eyebrow">Seri</p>
+          <p class="big-num"><span id="trStreak">0</span><small> gün</small></p>
+          <p class="muted small">Bugün çözüldü mü? <span id="trToday">hayır</span></p>
+        </div>
+        <div class="stat-card">
+          <p class="eyebrow">Toplam</p>
+          <p class="big-num"><span id="trSolved">0</span><small> soru</small></p>
+          <p class="muted small">Doğruluk: <b id="trAcc">—</b></p>
+        </div>
+        <div class="stat-card">
+          <p class="eyebrow">Kategori gücü</p>
+          <div class="catbars" id="catBars"></div>
+        </div>
+        <div class="stat-card">
+          <p class="eyebrow">Son 14 gün</p>
+          <div class="heat" id="heatmap"></div>
+          <div class="heat-legend"><span>14 gün önce</span><span>bugün</span></div>
+        </div>
+      </aside>
+
+      <div class="trainer-main panel" id="trainerMain">
+        <div class="trainer-idle" id="trainerIdle">
+          <p class="eyebrow">Hazır mısın?</p>
+          <h3>10 soruluk seans</h3>
+          <p class="muted">Klavyeden 1–4 ile hızlı cevap verebilirsin. Her sorudan sonra kısa açıklama gelir.</p>
+          <button class="btn btn-primary" id="startSession">Seansı başlat</button>
+        </div>
+        <div id="trainerPlay" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= YOL HARİTASI ================= -->
+  <section class="view" id="view-yol" hidden>
+    <div class="section-head">
+      <p class="eyebrow">90 günlük rota</p>
+      <h2>Haftalık <em>çıktı</em> üreten bir plan.</h2>
+      <p class="lede narrow">
+        Plan, pusula sonucundaki en uygun alana ve günlük ayırabildiğin süreye göre kurulur.
+        Her haftanın sonunda <b>elle tutulur bir çıktı</b> var: not, problem seti, kod, anlatım.
+      </p>
+    </div>
+    <div id="roadmapHost"></div>
+  </section>
+
+  <!-- ================= KÜTÜPHANE ================= -->
+  <section class="view" id="view-kutuphane" hidden>
+    <div class="section-head">
+      <p class="eyebrow">Kütüphane</p>
+      <h2>Gürültüyü <em>ayıklanmış</em> kaynaklar.</h2>
+      <p class="lede narrow">Sadece gerçekten işe yarayan, yıllardır ayakta kalan kaynaklar. Ücretsiz olanlar işaretli.</p>
+    </div>
+    <div class="lib-filters" id="libFilters"></div>
+    <div class="lib-grid" id="libGrid"></div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <p><b>ikigai × matematik</b> — tüm veriler yalnızca bu tarayıcıda saklanır. Sunucuya hiçbir şey gitmez.</p>
+  <p class="muted small">Matematik bir yetenek testi değil, bir birikim sanatıdır. Küçük ama her gün.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>

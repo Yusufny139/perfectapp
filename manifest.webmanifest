@@ -1,0 +1,13 @@
+{
+  "name": "İkigai × Matematik",
+  "short_name": "ikigai×mat",
+  "description": "İkigai pusulası, matematik alanı eşleştirmesi, interaktif laboratuvar, günlük antrenman ve 90 günlük kişisel yol haritası.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0a0d12",
+  "theme_color": "#0a0d12",
+  "lang": "tr",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
